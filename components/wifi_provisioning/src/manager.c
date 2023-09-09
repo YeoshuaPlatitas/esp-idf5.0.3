@@ -523,6 +523,9 @@ static void prov_stop_and_notify(bool is_async)
 
     /* This delay is so that the client side app is notified first
      * and then the provisioning is stopped. Generally 1000ms is enough. */
+
+    return;
+
     if (!is_async)
     {
         uint32_t cleanup_delay = prov_ctx->cleanup_delay > 100 ? prov_ctx->cleanup_delay : 100;

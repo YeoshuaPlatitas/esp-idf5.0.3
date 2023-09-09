@@ -151,7 +151,7 @@ static void event_handler(void* arg, esp_event_base_t event_base,
                 break;
             case WIFI_PROV_END:
                 /* De-initialize manager once provisioning is finished */
-                wifi_prov_mgr_deinit();
+                // wifi_prov_mgr_deinit();
                 break;
             default:
                 break;
@@ -436,7 +436,7 @@ void app_main(void)
 
         /* We don't need the manager as device is already provisioned,
          * so let's release it's resources */
-        wifi_prov_mgr_deinit();
+        // wifi_prov_mgr_deinit();
 
         /* Start Wi-Fi station */
         wifi_init_sta();
