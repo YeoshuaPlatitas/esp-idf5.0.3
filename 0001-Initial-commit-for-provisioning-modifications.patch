@@ -1,0 +1,49 @@
+From 5ae97c151aa397874abee3fcc3ee8a5636b7e33d Mon Sep 17 00:00:00 2001
+From: YeoshuaPlatitas <yeoshua312@gmail.com>
+Date: Sat, 9 Sep 2023 13:33:44 +0800
+Subject: [PATCH] Initial commit for provisioning modifications
+
+---
+ components/wifi_provisioning/src/manager.c          | 3 +++
+ examples/provisioning/wifi_prov_mgr/main/app_main.c | 4 ++--
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/components/wifi_provisioning/src/manager.c b/components/wifi_provisioning/src/manager.c
+index 3e8a3d2c59..6dc3a7aeb5 100644
+--- a/components/wifi_provisioning/src/manager.c
++++ b/components/wifi_provisioning/src/manager.c
+@@ -523,6 +523,9 @@ static void prov_stop_and_notify(bool is_async)
+ 
+     /* This delay is so that the client side app is notified first
+      * and then the provisioning is stopped. Generally 1000ms is enough. */
++
++    return;
++
+     if (!is_async)
+     {
+         uint32_t cleanup_delay = prov_ctx->cleanup_delay > 100 ? prov_ctx->cleanup_delay : 100;
+diff --git a/examples/provisioning/wifi_prov_mgr/main/app_main.c b/examples/provisioning/wifi_prov_mgr/main/app_main.c
+index 792b44d2c8..5142eb2d21 100644
+--- a/examples/provisioning/wifi_prov_mgr/main/app_main.c
++++ b/examples/provisioning/wifi_prov_mgr/main/app_main.c
+@@ -151,7 +151,7 @@ static void event_handler(void* arg, esp_event_base_t event_base,
+                 break;
+             case WIFI_PROV_END:
+                 /* De-initialize manager once provisioning is finished */
+-                wifi_prov_mgr_deinit();
++                // wifi_prov_mgr_deinit();
+                 break;
+             default:
+                 break;
+@@ -436,7 +436,7 @@ void app_main(void)
+ 
+         /* We don't need the manager as device is already provisioned,
+          * so let's release it's resources */
+-        wifi_prov_mgr_deinit();
++        // wifi_prov_mgr_deinit();
+ 
+         /* Start Wi-Fi station */
+         wifi_init_sta();
+-- 
+2.41.0
+
